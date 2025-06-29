@@ -81,7 +81,7 @@
     /* Layout */
     .container {
       width: 90%;
-      max-width: 1200px;
+      max-width: 1600px;
       margin: 0 auto;
       padding: 0 20px;
     }
@@ -107,6 +107,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
     
     .logo {
@@ -224,6 +227,8 @@
       grid-template-columns: 1.1fr 1fr;
       gap: 60px;
       align-items: center;
+      max-width: 1600px;
+      margin: 0 auto;
     }
     
     .hero-text {
@@ -308,7 +313,7 @@
     .profile-img {
       width: 100%;
       max-width: 380px;
-      height: auto;
+      height: 380px;
       border-radius: 50%;
       object-fit: cover;
       position: relative;
@@ -381,6 +386,8 @@
       padding: 40px;
       box-shadow: var(--card-shadow);
       border: 1px solid rgba(255, 255, 255, 0.05);
+      max-width: 1600px;
+      margin: 0 auto;
     }
     
     /* About Section */
@@ -666,6 +673,80 @@
       flex-grow: 1;
     }
     
+    /* Certificates Section */
+    .certificates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+    }
+    
+    .certificate-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .certificate-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-color);
+      box-shadow: var(--card-shadow);
+    }
+    
+    .certificate-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--accent-color);
+    }
+    
+    .certificate-card h3 {
+      font-size: 1.3rem;
+      color: var(--text-color);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .certificate-card h3 i {
+      color: var(--accent-color);
+      font-size: 1.5rem;
+    }
+    
+    .certificate-issuer {
+      color: var(--accent-color);
+      font-size: 1rem;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+    
+    .certificate-details {
+      color: #d0d0d0;
+      margin-bottom: 20px;
+    }
+    
+    .certificate-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .certificate-link:hover {
+      color: var(--link-hover-color);
+      transform: translateX(5px);
+    }
+    
     /* Contact Section */
     .contact-container {
       display: grid;
@@ -783,7 +864,7 @@
     }
     
     .footer-content {
-      max-width: 600px;
+      max-width: 1600px;
       margin: 0 auto;
     }
     
@@ -945,7 +1026,8 @@
         grid-template-columns: 1fr;
       }
       
-      .projects-grid {
+      .projects-grid,
+      .certificates-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -983,6 +1065,7 @@
       
       .profile-img {
         max-width: 280px;
+        height: 280px;
       }
     }
   </style>
@@ -994,17 +1077,18 @@
   <div class="bg-element"></div>
   
   <header>
-    <div class="container nav-container">
+    <div class="nav-container">
       <div class="logo" id="homeButton">
         <i class="fas fa-file-contract"></i>
         <span>Mina E. Beshay</span>
       </div>
       <nav class="desktop-nav">
         <button class="nav-link" data-section="home">Home</button>
-        <button class="nav-link" data-section="about">About Me</button>
+        <button class="nav-link" data-section="about">About</button>
         <button class="nav-link" data-section="skills">Skills</button>
         <button class="nav-link" data-section="experience">Experience</button>
         <button class="nav-link" data-section="projects">Projects</button>
+        <button class="nav-link" data-section="certificates">Certificates</button>
         <button class="nav-link" data-section="contact">Contact</button>
       </nav>
       <button class="mobile-nav-btn">
@@ -1014,10 +1098,11 @@
     <div class="mobile-nav">
       <ul>
         <button class="nav-link" data-section="home">Home</button>
-        <button class="nav-link" data-section="about">About Me</button>
+        <button class="nav-link" data-section="about">About</button>
         <button class="nav-link" data-section="skills">Skills</button>
         <button class="nav-link" data-section="experience">Experience</button>
         <button class="nav-link" data-section="projects">Projects</button>
+        <button class="nav-link" data-section="certificates">Certificates</button>
         <button class="nav-link" data-section="contact">Contact</button>
       </ul>
     </div>
@@ -1025,27 +1110,28 @@
   
   <main id="main-content">
     <section class="hero" id="home">
-      <div class="container hero-content">
-        <div class="hero-text">
-          <h1>Mina E. Beshay</h1>
-          <div class="title">Senior Document Controller</div>
-          <p>
-            With over 9 years of dedicated experience in document control and management systems, 
-            I specialize in ensuring compliance with ISO standards, optimizing documentation workflows, 
-            and maintaining meticulous project records for large-scale engineering and construction projects.
-          </p>
-          <div class="hero-btns">
-            <a class="btn btn-primary" href="mailto:mina.beshay@example.com">
-              <i class="fas fa-envelope"></i>
-              Contact Me
-            </a>
-            <a class="btn btn-secondary" href="https://www.linkedin.com/in/mina-e-beshay" target="_blank">
-              <i class="fab fa-linkedin-in"></i>
-              LinkedIn
-            </a>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Mina E. Beshay</h1>
+            <div class="title">Senior Document Controller</div>
+            <p>
+              With over 9 years of dedicated experience in document control and management systems, 
+              I specialize in ensuring compliance with ISO standards, optimizing documentation workflows, 
+              and maintaining meticulous project records for large-scale engineering and construction projects.
+            </p>
+            <div class="hero-btns">
+              <a class="btn btn-primary" href="mailto:mina.beshay@example.com">
+                <i class="fas fa-envelope"></i>
+                Contact Me
+              </a>
+              <a class="btn btn-secondary" href="https://www.linkedin.com/in/mina-e-beshay" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+                LinkedIn
+              </a>
+            </div>
           </div>
-        </div>
-        <div class="profile-container">
+          <div class="profile-container">
           <div class="profile-frame">
             <img alt="Profile Picture" class="profile-img" 
                  src="image/mina.jpeg">
@@ -1288,6 +1374,78 @@
               <p class="project-description">
                 Grand Egyptian Museum
               </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- New Courses & Certificates Section -->
+    <section id="certificates">
+      <div class="container">
+        <h2 class="section-title">Courses & Certificates</h2>
+        <div class="section-card">
+          <div class="certificates-grid">
+            <div class="certificate-card">
+              <h3><i class="fas fa-language"></i> Speaking and Writing English</h3>
+              <div class="certificate-issuer">Marriott Hotel HR Courses</div>
+              <div class="certificate-details">
+                <p><strong>Year:</strong> 2013</p>
+                <p>Professional communication skills development program focused on business English proficiency.</p>
+              </div>
+            </div>
+            
+            <div class="certificate-card">
+              <h3><i class="fas fa-medal"></i> 10 Years Document Control</h3>
+              <div class="certificate-issuer">NSF National Steel Fabrication</div>
+              <div class="certificate-details">
+                <p><strong>Duration:</strong> 2015 - Present</p>
+                <p>A decade of professional experience managing complex documentation systems for engineering projects.</p>
+              </div>
+            </div>
+            
+            <div class="certificate-card">
+              <h3><i class="fas fa-file-excel"></i> Excel Basics for Data Analysis</h3>
+              <div class="certificate-issuer">IBM, Coursera</div>
+              <div class="certificate-details">
+                <p><strong>Status:</strong> In progress (3/9 levels completed)</p>
+                <p>Learning essential Excel functions for data processing and analysis in professional environments.</p>
+                <a href="https://www.coursera.org/learn/excel-basics-data-analysis-ibm" target="_blank" class="certificate-link">
+                  View Course <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+            
+            <div class="certificate-card">
+              <h3><i class="fas fa-certificate"></i> C1 English Certificate</h3>
+              <div class="certificate-issuer">British Council</div>
+              <div class="certificate-details">
+                <p><strong>Year:</strong> 2022</p>
+                <p><strong>Focus:</strong> Speaking and listening proficiency at C1 Advanced level</p>
+                <p>Validated English language skills for professional communication.</p>
+              </div>
+            </div>
+            
+            <div class="certificate-card">
+              <h3><i class="fas fa-code"></i> Python Basics</h3>
+              <div class="certificate-issuer">University of Michigan</div>
+              <div class="certificate-details">
+                <p>Fundamental programming concepts and Python syntax for automation and data processing.</p>
+                <a href="https://www.coursera.org/account/accomplishments/certificate/ABCD1234" target="_blank" class="certificate-link">
+                  View Certificate <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+            
+            <div class="certificate-card">
+              <h3><i class="fas fa-laptop-code"></i> Python Functions, Files, and Dictionaries</h3>
+              <div class="certificate-issuer">University of Michigan</div>
+              <div class="certificate-details">
+                <p>Advanced Python programming techniques focusing on data structures and file handling.</p>
+                <a href="https://www.coursera.org/account/accomplishments/certificate/XYZ987" target="_blank" class="certificate-link">
+                  View Certificate <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
