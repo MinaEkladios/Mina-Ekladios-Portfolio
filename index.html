@@ -939,6 +939,72 @@
       left: 10%;
     }
     
+    /* Custom Modal for Alert */
+    .custom-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1001;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .custom-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .custom-modal-content {
+      background-color: var(--secondary-bg);
+      color: var(--text-color);
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      transform: translateY(-20px);
+      transition: transform 0.3s ease;
+    }
+
+    .custom-modal-overlay.active .custom-modal-content {
+      transform: translateY(0);
+    }
+
+    .custom-modal-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+    }
+
+    .custom-modal-content p {
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    .custom-modal-close {
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .custom-modal-close:hover {
+      background-color: var(--link-hover-color);
+    }
+
     /* Responsive styles */
     @media (max-width: 1100px) {
       .hero-content {
@@ -1134,12 +1200,12 @@
           <div class="profile-container">
           <div class="profile-frame">
             <img alt="Profile Picture" class="profile-img" 
-                 src="image/mina.jpeg">
+                 src="image/mina.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/380x380/252a33/f0f0f0?text=Mina'">
           </div>
         </div>
       </div>
     </section>
-        
+    
     <section id="about">
       <div class="container">
         <h2 class="section-title">About Me</h2>
@@ -1546,6 +1612,15 @@
       </div>
     </div>
   </footer>
+
+  <!-- Custom Modal HTML -->
+  <div class="custom-modal-overlay" id="customModal">
+    <div class="custom-modal-content">
+      <h3>Message Sent!</h3>
+      <p>Thank you for your message! I will get back to you soon.</p>
+      <button class="custom-modal-close">Close</button>
+    </div>
+  </div>
   
   <script>
     // Smooth scrolling for navigation links
@@ -1607,12 +1682,36 @@
       document.querySelector('.nav-link[data-section="home"]').classList.add('active');
     });
     
-    // Form submission
+    // Form submission with custom modal
     document.querySelector('form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Thank you for your message! I will get back to you soon.');
+      e.preventDefault(); // Prevent default form submission
+      
+      // Show the custom modal
+      const customModal = document.getElementById('customModal');
+      customModal.classList.add('active');
+
+      // Reset the form after showing the message
       this.reset();
     });
+
+    // Close custom modal
+    document.querySelector('.custom-modal-close').addEventListener('click', function() {
+      document.getElementById('customModal').classList.remove('active');
+    });
+
+    // Close modal if clicking outside the content
+    document.getElementById('customModal').addEventListener('click', function(e) {
+        if (e.target === this) { // Only close if the overlay itself is clicked
+            this.classList.remove('active');
+        }
+    });
+
+    // Add onerror to image for fallback
+    document.querySelector('.profile-img').onerror = function() {
+      this.onerror = null; // Prevents infinite loop if fallback also fails
+      this.src = 'https://placehold.co/380x380/252a33/f0f0f0?text=Mina'; // Placeholder image
+    };
+
   </script>
 </body>
 </html>
